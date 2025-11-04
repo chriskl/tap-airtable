@@ -59,7 +59,7 @@ AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "createdTime": th.DateTimeType,
     "rollup": th.StringType,
     "count": th.StringType,
-    "lookup": th.StringType,
+    "lookup": th.ArrayType(th.StringType),
     "multipleLookupValues": th.ArrayType(th.StringType),
     "autoNumber": th.StringType,
     "barcode": th.StringType,
