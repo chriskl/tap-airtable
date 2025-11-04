@@ -62,7 +62,7 @@ AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "duration": th.StringType,
     "lastModifiedTime": th.DateTimeType,
     "button": th.StringType,
-    "createdBy": th.StringType,
+    "createdBy": AirtableCollaborator,
     "lastModifiedBy": th.StringType,
     "externalSyncSource": th.StringType,
     "aiText": th.StringType,
