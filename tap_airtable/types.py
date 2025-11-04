@@ -23,6 +23,11 @@ AirtableAttachment = th.ObjectType(
     th.Property("thumbnails", AirtableThumbnailSet),
 )
 
+AirtableButton = th.ObjectType(
+    th.Property("label", th.StringType),
+    th.Property("url", th.StringType),
+)
+
 AirtableCollaborator = th.ObjectType(
     th.Property("id", th.StringType),
     th.Property("email", th.StringType),
@@ -31,6 +36,7 @@ AirtableCollaborator = th.ObjectType(
     th.Property("profilePicUrl", th.StringType),
 )
 
+# See: https://airtable.com/developers/web/api/field-model
 AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "singleLineText": th.StringType,
     "email": th.StringType,
@@ -61,7 +67,7 @@ AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "richText": th.StringType,
     "duration": th.StringType,
     "lastModifiedTime": th.DateTimeType,
-    "button": th.StringType,
+    "button": AirtableButton,
     "createdBy": AirtableCollaborator,
     "lastModifiedBy": th.StringType,
     "externalSyncSource": th.StringType,
