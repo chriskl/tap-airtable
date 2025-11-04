@@ -3,7 +3,9 @@ from typing import Any
 from singer_sdk import typing as th
 
 AirtableThumbnail = th.ObjectType(
-    th.Property("url", th.StringType), th.Property("height", th.NumberType), th.Property("width", th.NumberType)
+    th.Property("url", th.StringType),
+    th.Property("height", th.NumberType),
+    th.Property("width", th.NumberType)
 )
 
 AirtableThumbnailSet = th.ObjectType(
@@ -36,6 +38,12 @@ AirtableCollaborator = th.ObjectType(
     th.Property("profilePicUrl", th.StringType),
 )
 
+AirtableLookup = th.OneOf(
+    th.ArrayType(th.NumberType),
+    th.ArrayType(th.StringType),
+    th.ArrayType(th.BooleanType)
+)
+
 # See: https://airtable.com/developers/web/api/field-model
 AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "singleLineText": th.StringType,
@@ -59,7 +67,7 @@ AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "createdTime": th.DateTimeType,
     "rollup": th.StringType,
     "count": th.StringType,
-    "lookup": th.ArrayType(th.StringType),
+    "lookup": AirtableLookup,
     "multipleLookupValues": th.ArrayType(th.StringType),
     "autoNumber": th.StringType,
     "barcode": th.StringType,
