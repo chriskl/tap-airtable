@@ -43,7 +43,9 @@ class TapAirtable(Tap):
         streams: list[BaseAirtableStream] = []
         mapping: dict[str, str] = self.config.get("table_mapping", {})
         for base in client.get_bases(self.config.get("base_ids", [])):
+            logger.debug(f"Discovered base: {base.name} ({base.id})")
             for table in base.tables:
+                logger.debug(f"Discovered table: {table.name} ({table.id})")
                 if table.id in mapping:
                     logger.debug(f"Renaming table {table.name} => {mapping[table.id]}")
                     table.name = mapping[table.id]

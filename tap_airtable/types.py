@@ -39,9 +39,15 @@ AirtableCollaborator = th.ObjectType(
 )
 
 AirtableLookup = th.OneOf(
-    th.ArrayType(th.NumberType),
-    th.ArrayType(th.StringType),
-    th.ArrayType(th.BooleanType)
+    th.NumberType,
+    th.StringType,
+    th.BooleanType
+)
+
+AirtableRollup = th.OneOf(
+    th.NumberType,
+    th.StringType,
+    th.BooleanType
 )
 
 # See: https://airtable.com/developers/web/api/field-model
@@ -65,13 +71,13 @@ AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "checkbox": th.BooleanType,
     "formula": th.StringType,
     "createdTime": th.DateTimeType,
-    "rollup": th.StringType,
-    "count": th.StringType,
+    "rollup": AirtableRollup,
+    "count": th.NumberType,
     "lookup": AirtableLookup,
-    "multipleLookupValues": th.ArrayType(th.StringType),
+    "multipleLookupValues": th.ArrayType(AirtableLookup),
     "autoNumber": th.StringType,
     "barcode": th.StringType,
-    "rating": th.StringType,
+    "rating": th.NumberType,
     "richText": th.StringType,
     "duration": th.StringType,
     "lastModifiedTime": th.DateTimeType,
